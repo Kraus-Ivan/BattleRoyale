@@ -10,13 +10,13 @@ namespace BattleRoyale
     {
         public Assasin(string name) : base(name) { }
 
-        public override void Attack(Enemy attackedEnemy)
+        public override int Attack(Enemy attackedEnemy)
         {
             double a = Random.Shared.Next(_minDeviation, _maxDeviation) * _attackStrength;
             a /= 100;
             a = Math.Floor(a);
             attackedEnemy.Assasinate();
-            attackedEnemy.ReceiveDamage((int)a);
+            return attackedEnemy.ReceiveDamage((int)a);
         }
     }
 }

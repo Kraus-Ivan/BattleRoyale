@@ -61,10 +61,10 @@ namespace BattleRoyale
                         }
                         if (player.IsAssasinated)
                         {
-                            player.Hp -= 5;
                             Console.BackgroundColor = ConsoleColor.Red;
                             Console.ForegroundColor = ConsoleColor.Black;
                             Console.WriteLine("Na následek assasinování přišel {0} o 5 životů", player.ToString());
+                            player.Hp -= 5;
                             Console.ForegroundColor = ConsoleColor.White;
                             Console.BackgroundColor = ConsoleColor.Black;
                             if (!SomeOneAlive())
@@ -91,8 +91,8 @@ namespace BattleRoyale
                             Console.Write("{0} zaútočil na ", player.ToString());
                             Console.BackgroundColor = ConsoleColor.Red;
                             Console.Write(" {0}", pickedOne.ToString());
-                            player.Attack(pickedOne);
-                            Console.Write(", ubral mu {0} HP", 100 - pickedOne.Hp);
+                            int damage = player.Attack(pickedOne);
+                            Console.Write(", ubral mu {0} HP", damage);
                             Console.BackgroundColor = ConsoleColor.Black;
                             Console.ForegroundColor = ConsoleColor.White;
                             Console.WriteLine("\n");

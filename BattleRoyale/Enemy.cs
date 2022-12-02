@@ -8,8 +8,8 @@ namespace BattleRoyale
 {
     internal abstract class Enemy
     {
-        protected const int _MAXHP = 100; 
-        protected int _hp = _MAXHP;
+        public const int _MAXHP = 100; 
+        public int _hp = _MAXHP;
         protected bool _isAlive;  
         protected static int counter = 0;
         protected double _protection = 0.15;
@@ -82,19 +82,20 @@ namespace BattleRoyale
             return pickedOne;
         }
 
-        public virtual void Attack(Enemy attackedEnemy)
+        public virtual int Attack(Enemy attackedEnemy)
         {
             double a = Random.Shared.Next(_minDeviation, _maxDeviation) * _attackStrength;
             a /= 100;
             a = Math.Floor(a);
-            attackedEnemy.ReceiveDamage((int)a);
+            return attackedEnemy.ReceiveDamage((int)a);
         }
 
-        public void ReceiveDamage(int damage)
+        public int ReceiveDamage(int damage)
         {
             double d = damage * (1 - _protection);
             d = Math.Floor(d);
             Hp -= (int)d;
+            return (int)d;
         }
 
         public override string ToString()

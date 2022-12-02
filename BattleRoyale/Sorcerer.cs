@@ -22,7 +22,7 @@ namespace BattleRoyale
             Mana = true;
         }
 
-        public override void Attack(Enemy attackedEnemy)
+        public override int Attack(Enemy attackedEnemy)
         {
             double a;
             if (_attacks % MANARESET == 0)
@@ -39,8 +39,8 @@ namespace BattleRoyale
                 a /= 100;
             }
             a = Math.Floor(a);
-            attackedEnemy.ReceiveDamage((int)a);
             _attacks++;
+            return attackedEnemy.ReceiveDamage((int)a);
         }
     }
 }
