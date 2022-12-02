@@ -62,7 +62,11 @@ namespace BattleRoyale
                         if (player.IsAssasinated)
                         {
                             player.Hp -= 5;
+                            Console.BackgroundColor = ConsoleColor.Red;
+                            Console.ForegroundColor = ConsoleColor.Black;
                             Console.WriteLine("Na následek assasinování přišel {0} o 5 životů", player.ToString());
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.BackgroundColor = ConsoleColor.Black;
                             if (!SomeOneAlive())
                                 WhoWon(_players);
                         }
@@ -72,21 +76,39 @@ namespace BattleRoyale
                         if (player.IsParalyzed)
                         {
                             player.Paralyze();
+                            Console.BackgroundColor = ConsoleColor.DarkYellow;
+                            Console.ForegroundColor = ConsoleColor.Black;
                             Console.WriteLine("{0} byl paralyzován, a proto nemohl v tomto kole hrát.", player.ToString());
+                            Console.ForegroundColor = ConsoleColor.White;
+                            Console.BackgroundColor = ConsoleColor.Black;
                             Console.WriteLine("\n");
                         }
                         else
                         {
+                            Console.ForegroundColor= ConsoleColor.Black;
                             Enemy pickedOne = player.PickOpponent(_players);
+                            Console.BackgroundColor = ConsoleColor.Green;
+                            Console.Write("{0} zaútočil na ", player.ToString());
+                            Console.BackgroundColor = ConsoleColor.Red;
+                            Console.Write(" {0}", pickedOne.ToString());
                             player.Attack(pickedOne);
-                            Console.WriteLine("{0} zaútočil na {1}", player.ToString(), pickedOne.ToString());
+                            Console.Write(", ubral mu {0} HP", 100 - pickedOne.Hp);
+                            Console.BackgroundColor = ConsoleColor.Black;
+                            Console.ForegroundColor = ConsoleColor.White;
                             Console.WriteLine("\n");
                         }
                     }
                 }
                 foreach (Enemy player in _players)
                 {
+                    if (player.IsAlive)
+                    {
+                        Console.BackgroundColor = ConsoleColor.White;
+                        Console.ForegroundColor = ConsoleColor.Black;
+                    }
                     Console.WriteLine(player.ToString());
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.ForegroundColor = ConsoleColor.White;
                 }
                 Console.ReadKey();
                 Console.Clear();
@@ -100,7 +122,11 @@ namespace BattleRoyale
             {
                 if (player.IsAlive)
                 {
+                    Console.BackgroundColor = ConsoleColor.Yellow;
+                    Console.ForegroundColor = ConsoleColor.Black;
                     Console.WriteLine("Zvítězil {0}", player.ToString());
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.ForegroundColor = ConsoleColor.White;
                     return player;
                 }
             }
